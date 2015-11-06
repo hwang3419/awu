@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'BB',
+	'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -75,14 +76,22 @@ WSGI_APPLICATION = 'awu.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    #'DEFAULT_PERMISSION_CLASSES': [
+    #   'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    #]
+}
+
 if os.environ.get('OPENSHIFT_MYSQL_DB_HOST',None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
             'NAME': 'awu',                      # Or path to database file if using sqlite3.
             # The following settings are not used with sqlite3:
-            'USER': 'adminN7GDS4G',
-            'PASSWORD': 'qc9AAtxHDNEt',
+            'USER': 'admin5UAqy6t',
+            'PASSWORD': 'WJg_3CwduDwR',
             'HOST': os.environ.get('OPENSHIFT_MYSQL_DB_HOST'),                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
             'PORT': os.environ.get('OPENSHIFT_MYSQL_DB_PORT'),                      # Set to empty string for default.
         }
