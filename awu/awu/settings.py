@@ -87,6 +87,19 @@ if os.environ.get('OPENSHIFT_MYSQL_DB_HOST',None):
             'PORT': os.environ.get('OPENSHIFT_MYSQL_DB_PORT'),                      # Set to empty string for default.
         }
     }
+else:
+    DEBUG = True
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),                  # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            #'USER': 'adminN7GDS4G',
+            #'PASSWORD': 'qc9AAtxHDNEt',
+            #'HOST': os.environ.get('OPENSHIFT_MYSQL_DB_HOST'),                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            #'PORT': os.environ.get('OPENSHIFT_MYSQL_DB_PORT'),                      # Set to empty string for default.
+        }
+    }
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
