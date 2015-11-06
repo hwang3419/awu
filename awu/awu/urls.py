@@ -15,8 +15,23 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
+from BB import views
+
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'posts', views.PostViewSet)
+router.register(r'forums', views.ForumViewSet)
+router.register(r'topics', views.TopicViewSet)
+
+
 
 urlpatterns = [
     url(r'^admin1/', include(admin.site.urls)),
 	url(r'^test/$', 'BB.views.test', name='home'),
+	
+	url(r'^', include(router.urls)),
 ]
