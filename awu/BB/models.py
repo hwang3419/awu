@@ -21,7 +21,7 @@ class Forum(models.Model):
     description = models.TextField(default='')
     ordering = models.PositiveIntegerField(default=1)
     def __unicode__(self):
-        return self.title
+        return self.name
 
     def num_posts(self):
         return sum([t.num_posts() for t in self.topic_set.all()])

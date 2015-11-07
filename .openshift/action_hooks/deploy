@@ -18,3 +18,4 @@ python "$OPENSHIFT_REPO_DIR"wsgi/awu/manage.py migrate --noinput
 echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/awu/manage.py collectstatic --noinput'"
 # GETTING-STARTED: change 'myproject' to your project name:
 python "$OPENSHIFT_REPO_DIR"wsgi/awu/manage.py collectstatic --noinput
+ln -s /var/lib/openshift/563c28880c1e669fed0001ec/app-root/runtime/repo/static/* /var/lib/openshift/563c28880c1e669fed0001ec/app-root/runtime/repo/wsgi/static/
