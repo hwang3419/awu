@@ -15,9 +15,17 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+DJ_PROJECT_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(DJ_PROJECT_DIR)
+WSGI_DIR = os.path.dirname(BASE_DIR)
+REPO_DIR = os.path.dirname(WSGI_DIR)
+DATA_DIR = os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+
+import sys
+from socket import gethostname
+sys.path.append(os.path.join(REPO_DIR, 'libs'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ot30p)6)lko9oy!%dn!xigfhoo_ys44i5yeam6_jiv!1lkblxx'
@@ -25,7 +33,10 @@ SECRET_KEY = 'ot30p)6)lko9oy!%dn!xigfhoo_ys44i5yeam6_jiv!1lkblxx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['rhcloud.com']
+ALLOWED_HOSTS = [
+gethostname(), # For internal OpenShift load balancer security purposes.
+os.environ.get('OPENSHIFT_APP_DNS'), # Dynamically map to the OpenShift gear name.
+]
 
 
 # Application definition
@@ -126,5 +137,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(WSGI_DIR, 'static')
 from local_settings import *

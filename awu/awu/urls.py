@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from BB import views
-
+from django.contrib.auth.views import login, logout
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -31,7 +31,10 @@ router.register(r'topics', views.TopicViewSet)
 
 urlpatterns = [
     url(r'^admin1/', include(admin.site.urls)),
-	url(r'^test/$', 'BB.views.test', name='home'),
+	url(r'^accounts/profile/$', 'BB.views.test', name='home'),
 	
 	url(r'^', include(router.urls)),
+	
+	url(r'^login/$',  login, {'template_name': 'admin/login.html'}),
+    url(r'^accounts/logout/$', logout),
 ]
